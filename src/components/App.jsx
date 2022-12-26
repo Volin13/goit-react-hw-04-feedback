@@ -1,16 +1,58 @@
+import React, { useReducer } from "react";
+import { Container, Section, FeedbackOptions, Statistics } from "./index";
+const initialState = {
+  good: 0,
+  neutral: 0,
+  bad: 0,
+  total: 0,
+  positivePercentage: 0,
+};
+const options = ["good", "neutral", "bad"];
+
+function reducer(state, action) {
+  const good = state.good;
+  const total = state.total + 1;
+  const positivePercentage = Number(((good / total) * 100).toFixed(0));
+  switch (action.type) {
+    case "good":
+      return { ...state, good: state.good + 1, total, positivePercentage };
+    case "neutral":
+      return {
+        ...state,
+        neutral: state.neutral + 1,
+        total,
+        positivePercentage,
+      };
+    case "bad":
+      return { ...state, bad: state.bad + 1, total, positivePercentage };
+    default:
+      return;
+  }
+}
+
 export const App = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const handleBtnClick = ({ target: { name } }) => {
+    dispatch({ type: name });
+  };
+  const { good, neutral, bad, total, positivePercentage } = state;
+  console.log(state.good);
+
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <Container>
+      <Section title="Please leave your feedback">
+        <FeedbackOptions options={options} onLeaveFeedback={handleBtnClick} />
+      </Section>
+      <Section title="Statistics">
+        <Statistics
+          good={good}
+          neutral={neutral}
+          bad={bad}
+          total={total}
+          positivePercentage={positivePercentage}
+        />
+      </Section>
+    </Container>
   );
 };
+export default App;
