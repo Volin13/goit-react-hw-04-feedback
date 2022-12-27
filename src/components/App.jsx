@@ -32,11 +32,11 @@ function reducer(state, action) {
 
 export const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const handleBtnClick = ({ target: { name } }) => {
+  const handleBtnClick = ({ currentTarget: { name } }) => {
     dispatch({ type: name });
   };
   const { good, neutral, bad, total, positivePercentage } = state;
-  console.log(state.good);
+  console.log(state);
 
   return (
     <Container>

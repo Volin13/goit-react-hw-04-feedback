@@ -12,7 +12,7 @@ export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
       case 'good':
         return <SlLike className={css.img} />;
 
-      case 'nautral':
+      case 'neutral':
         return <FiMeh className={css.img} />;
 
       default:
