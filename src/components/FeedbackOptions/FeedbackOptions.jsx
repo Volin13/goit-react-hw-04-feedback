@@ -1,18 +1,18 @@
-import { SlLike, SlCheck, SlDislike } from "react-icons/sl";
-import { FiMeh } from "react-icons/fi";
-import css from "./FeedbackOptions.module.css";
-import PropTypes from "prop-types";
+import { SlLike, SlCheck, SlDislike } from 'react-icons/sl';
+import { FiMeh } from 'react-icons/fi';
+import css from './FeedbackOptions.module.css';
+import PropTypes from 'prop-types';
 
 export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
-  const switchImages = (name) => {
+  const switchImages = name => {
     switch (name) {
-      case "bad":
+      case 'bad':
         return <SlDislike className={css.img} />;
 
-      case "good":
+      case 'good':
         return <SlLike className={css.img} />;
 
-      case "nautral":
+      case 'nautral':
         return <FiMeh className={css.img} />;
 
       default:
@@ -22,13 +22,13 @@ export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
     <div>
       <ul className={css.btn_list}>
-        {options.map((feedbackname) => (
+        {options.map(feedbackname => (
           <li key={feedbackname}>
             <button
               className={css.btn}
               type="button"
               name={feedbackname}
-              onClick={(evt) => onLeaveFeedback(evt)}
+              onClick={evt => onLeaveFeedback(evt)}
             >
               <span>{switchImages(feedbackname)} </span>
               {feedbackname}
